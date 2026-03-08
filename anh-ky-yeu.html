@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ảnh Kỉ Yếu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --gold: #C9A84C; --gold-light: #E8C96A; --navy: #0D1B2A;
+      --navy-mid: #162236; --cream: #F8F2E6;
+      --text-muted: rgba(200,185,154,.6);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--cream); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 64px 60px 52px; text-align: center;
+      border-bottom: 1px solid rgba(201,168,76,.15);
+      background: linear-gradient(to bottom, rgba(201,168,76,.04), transparent);
+      position: relative;
+    }
+    .page-header::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 120px; height: 1px; background: var(--gold);
+    }
+    .eyebrow { font-size: 10.5px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(30px,5vw,48px); font-weight: 700; }
+    h1 em { font-style: italic; color: var(--gold); }
+    .subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17px; color: var(--text-muted); margin-top: 14px; }
+
+    /* ── FILTER TABS ── */
+    .filter-bar {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; padding: 32px 40px 0; flex-wrap: wrap;
+    }
+    .filter-btn {
+      font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 9px 22px; border-radius: 2px; cursor: pointer;
+      border: 1px solid rgba(201,168,76,.2); background: transparent;
+      color: var(--text-muted); transition: all .25s ease;
+    }
+    .filter-btn:hover { color: var(--cream); border-color: rgba(201,168,76,.4); background: rgba(201,168,76,.06); }
+    .filter-btn.active { color: var(--gold); border-color: rgba(201,168,76,.5); background: rgba(201,168,76,.1); }
+
+    /* ── MASONRY GRID ── */
+    .gallery-wrapper { padding: 40px 50px 80px; }
+    .masonry {
+      columns: 4; column-gap: 14px;
+    }
+    @media (max-width: 1100px) { .masonry { columns: 3; } }
+    @media (max-width: 720px)  { .masonry { columns: 2; } }
+
+    .photo-card {
+      break-inside: avoid;
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid rgba(201,168,76,.12);
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .photo-card:hover {
+      border-color: rgba(201,168,76,.45);
+      box-shadow: 0 8px 32px rgba(0,0,0,.5), 0 0 0 1px rgba(201,168,76,.1);
+    }
+    .photo-card.hidden { display: none; }
+
+    /* Placeholder photo using CSS + SVG */
+    .photo-img {
+      width: 100%;
+      display: block;
+      aspect-ratio: var(--ar, 4/3);
+      position: relative;
+      overflow: hidden;
+    }
+    .photo-bg {
+      position: absolute; inset: 0;
+      background: var(--bg, #1a2d40);
+    }
+    .photo-pattern {
+      position: absolute; inset: 0;
+      opacity: .25;
+      background-image: radial-gradient(circle at 20% 50%, rgba(201,168,76,.4) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(201,168,76,.3) 0%, transparent 45%);
+    }
+    .photo-icon {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px;
+    }
+    .photo-icon .icon-emoji { font-size: clamp(24px,4vw,40px); filter: grayscale(0.3); }
+    .photo-icon .icon-label {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 11px; color: rgba(201,168,76,.6); letter-spacing: .15em;
+      text-align: center; padding: 0 10px;
+    }
+
+    /* Hover overlay */
+    .photo-overlay {
+      position: absolute; inset: 0;
+      background: rgba(13,27,42,.85);
+      display: flex; align-items: flex-end;
+      padding: 18px;
+      opacity: 0; transition: opacity .3s ease;
+    }
+    .photo-card:hover .photo-overlay { opacity: 1; }
+    .overlay-text {}
+    .overlay-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 600;
+      color: var(--cream); margin-bottom: 4px;
+    }
+    .overlay-meta { font-size: 11px; color: var(--gold); letter-spacing: .1em; }
+
+    /* gold line at bottom */
+    .photo-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--gold);
+      transform: scaleX(0); transition: transform .35s ease; transform-origin: left;
+    }
+    .photo-card:hover::after { transform: scaleX(1); }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,.92);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s ease;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lb-inner {
+      max-width: 700px; width: 90%;
+      background: var(--navy-mid);
+      border: 1px solid rgba(201,168,76,.25);
+      padding: 40px 36px;
+      text-align: center;
+      position: relative;
+      transform: scale(.95);
+      transition: transform .3s ease;
+    }
+    .lightbox.open .lb-inner { transform: scale(1); }
+    .lb-close {
+      position: absolute; top: 14px; right: 14px;
+      background: none; border: none; color: var(--gold);
+      font-size: 22px; cursor: pointer; line-height: 1;
+      transition: transform .2s;
+    }
+    .lb-close:hover { transform: rotate(90deg); }
+    .lb-photo {
+      width: 100%; aspect-ratio: 4/3;
+      background: var(--navy); border: 1px solid rgba(201,168,76,.1);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 12px; margin-bottom: 24px;
+      position: relative; overflow: hidden;
+    }
+    .lb-emoji { font-size: 60px; }
+    .lb-bg { position: absolute; inset: 0; opacity: .15; }
+    .lb-title {
+      font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700;
+      color: var(--cream); margin-bottom: 10px;
+    }
+    .lb-desc {
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 16px; color: var(--text-muted); line-height: 1.7;
+    }
+    .lb-tag {
+      display: inline-block; margin-top: 16px;
+      padding: 5px 16px; border: 1px solid rgba(201,168,76,.3);
+      font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--gold); border-radius: 2px;
+    }
+    .lb-nav {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; margin-top: 24px;
+    }
+    .lb-nav button {
+      background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.3);
+      color: var(--gold); padding: 8px 20px; cursor: pointer; font-size: 13px;
+      letter-spacing: .08em; text-transform: uppercase; transition: all .25s;
+    }
+    .lb-nav button:hover { background: rgba(201,168,76,.2); }
+
+    /* ── SECTION DIVIDER ── */
+    .section-divider {
+      display: flex; align-items: center; gap: 16px;
+      padding: 0 50px 24px; margin-top: 8px;
+    }
+    .section-divider::before,.section-divider::after {
+      content: ''; flex: 1; height: 1px; background: rgba(201,168,76,.15);
+    }
+    .section-divider span {
+      font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--gold); white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <p class="eyebrow">✦ Bộ Sưu Tập Hình Ảnh ✦</p>
+    <h1>Ảnh <em>Kỉ Yếu</em></h1>
+    <p class="subtitle">Lưu lại từng khoảnh khắc đẹp nhất của 12A1</p>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all" onclick="filterGallery('all',this)">Tất Cả</button>
+    <button class="filter-btn" data-filter="lop" onclick="filterGallery('lop',this)">📚 Học Tập</button>
+    <button class="filter-btn" data-filter="trai" onclick="filterGallery('trai',this)">🏕 Dã Ngoại</button>
+    <button class="filter-btn" data-filter="event" onclick="filterGallery('event',this)">🎉 Sự Kiện</button>
+    <button class="filter-btn" data-filter="canhan" onclick="filterGallery('canhan',this)">🌸 Cá Nhân</button>
+  </div>
+
+  <div class="gallery-wrapper">
+    <div class="masonry" id="masonry"></div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLB(event)">
+    <div class="lb-inner">
+      <button class="lb-close" onclick="closeLightbox()">✕</button>
+      <div class="lb-photo" id="lbPhoto">
+        <div class="lb-bg" id="lbBg"></div>
+        <span class="lb-emoji" id="lbEmoji">📷</span>
+      </div>
+      <h2 class="lb-title" id="lbTitle">—</h2>
+      <p class="lb-desc" id="lbDesc">—</p>
+      <span class="lb-tag" id="lbTag">—</span>
+      <div class="lb-nav">
+        <button onclick="navLB(-1)">← Trước</button>
+        <button onclick="navLB(1)">Sau →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const photos = [
+      { id:0,  cat:'lop',    ar:'4/3',  bg:'#1a2c3f', emoji:'📖', title:'Giờ Học Toán',          desc:'Những buổi chiều nghiên cứu Toán cao cấp, thầy cô tận tình hướng dẫn từng bài toán khó.', tag:'Học Tập · 2024' },
+      { id:1,  cat:'canhan', ar:'3/4',  bg:'#1e2d1e', emoji:'🌸', title:'Buổi Chụp Kỉ Yếu',      desc:'Mỗi bạn một góc sân trường, nụ cười rạng rỡ lưu lại ký ức tươi đẹp nhất.', tag:'Cá Nhân · 2025' },
+      { id:2,  cat:'trai',   ar:'16/9', bg:'#2d1e0f', emoji:'🏕', title:'Đêm Lửa Trại Lớp 10',    desc:'Ngọn lửa bập bùng, tiếng hát vang vọng, những vũ điệu tập thể đầu tiên của 12A1.', tag:'Dã Ngoại · 2022' },
+      { id:3,  cat:'event',  ar:'4/3',  bg:'#2d1a2d', emoji:'🏆', title:'Ngày Hội Thể Thao',      desc:'Cả lớp cùng nhau tranh tài trong ngày hội thể thao truyền thống của trường.', tag:'Sự Kiện · 2023' },
+      { id:4,  cat:'canhan', ar:'4/5',  bg:'#1a1f2d', emoji:'🎓', title:'Ngày Nhận Học Bổng',     desc:'Niềm vui và tự hào khi các bạn xuất sắc nhận học bổng khuyến học của trường.', tag:'Cá Nhân · 2024' },
+      { id:5,  cat:'lop',    ar:'4/3',  bg:'#0f2020', emoji:'🔬', title:'Giờ Thực Hành Hóa',      desc:'Cùng nhau khám phá thế giới hóa học qua những thí nghiệm thú vị trong phòng lab.', tag:'Học Tập · 2023' },
+      { id:6,  cat:'event',  ar:'3/4',  bg:'#2a1a10', emoji:'🎭', title:'Hội Diễn Văn Nghệ',      desc:'Sân khấu lung linh, những tiết mục đặc sắc do chính các bạn lớp 12A1 dàn dựng.', tag:'Sự Kiện · 2024' },
+      { id:7,  cat:'trai',   ar:'4/3',  bg:'#102010', emoji:'⛺', title:'Cắm Trại Rừng Thông',     desc:'Một đêm dưới bầu trời đầy sao, cùng nhau nướng khoai, kể chuyện đến tận sáng.', tag:'Dã Ngoại · 2023' },
+      { id:8,  cat:'canhan', ar:'1/1',  bg:'#201a2d', emoji:'🌺', title:'Chụp Ảnh Cá Nhân',       desc:'Những khoảnh khắc riêng tư được ghi lại trong chiều tà trên hành lang lớp học.', tag:'Cá Nhân · 2025' },
+      { id:9,  cat:'lop',    ar:'16/9', bg:'#1a1510', emoji:'🖊', title:'Ôn Thi Đại Học',          desc:'Những đêm khuya cùng nhau ôn bài, lo lắng nhưng đầy quyết tâm trước kỳ thi.', tag:'Học Tập · 2025' },
+      { id:10, cat:'event',  ar:'4/3',  bg:'#10202a', emoji:'🎊', title:'Tiệc Sinh Nhật Lớp',     desc:'Bất ngờ sinh nhật tập thể — bánh kem, bóng bay và những nụ cười không ngừng.', tag:'Sự Kiện · 2024' },
+      { id:11, cat:'trai',   ar:'3/4',  bg:'#0f1a25', emoji:'🏖', title:'Du Lịch Biển',            desc:'Chuyến đi biển lớp 11 — sóng xô bờ cát, những bức ảnh nhảy lên trời xanh.', tag:'Dã Ngoại · 2024' },
+      { id:12, cat:'canhan', ar:'4/3',  bg:'#25150f', emoji:'📸', title:'Chụp Ảnh Tốt Nghiệp',    desc:'Tà áo dài trắng tinh khôi, nụ cười rạng rỡ — khoảnh khắc thiêng liêng nhất.', tag:'Cá Nhân · 2025' },
+      { id:13, cat:'event',  ar:'4/3',  bg:'#1a2510', emoji:'🌿', title:'Tết Trồng Cây',           desc:'Cùng nhau trồng cây xanh cho trường, góp phần làm đẹp môi trường học tập.', tag:'Sự Kiện · 2023' },
+      { id:14, cat:'lop',    ar:'3/4',  bg:'#1f1a2d', emoji:'💻', title:'Học Nhóm Online',         desc:'Những buổi học online mùa dịch — màn hình máy tính thay thế bảng đen phấn trắng.', tag:'Học Tập · 2022' },
+      { id:15, cat:'trai',   ar:'16/9', bg:'#2d200f', emoji:'🌄', title:'Leo Núi Fansipan',        desc:'Chinh phục đỉnh núi cao nhất Đông Nam Á — thách thức lớn nhất lớp từng vượt qua.', tag:'Dã Ngoại · 2024' },
+    ];
+
+    let currentLB = 0;
+    let visiblePhotos = [...photos];
+
+    const masonry = document.getElementById('masonry');
+
+    function renderCards() {
+      masonry.innerHTML = '';
+      photos.forEach((p, i) => {
+        const card = document.createElement('div');
+        card.className = 'photo-card';
+        card.dataset.cat = p.cat;
+        card.dataset.idx = i;
+        card.innerHTML = `
+          <div class="photo-img" style="--ar:${p.ar}">
+            <div class="photo-bg" style="background:${p.bg}"></div>
+            <div class="photo-pattern"></div>
+            <div class="photo-icon">
+              <span class="icon-emoji">${p.emoji}</span>
+              <span class="icon-label">${p.title}</span>
+            </div>
+            <div class="photo-overlay">
+              <div class="overlay-text">
+                <p class="overlay-title">${p.title}</p>
+                <p class="overlay-meta">${p.tag}</p>
+              </div>
+            </div>
+          </div>`;
+        card.addEventListener('click', () => openLightbox(i));
+        masonry.appendChild(card);
+      });
+    }
+
+    function filterGallery(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.photo-card').forEach(c => {
+        if (cat === 'all' || c.dataset.cat === cat) c.classList.remove('hidden');
+        else c.classList.add('hidden');
+      });
+    }
+
+    function openLightbox(idx) {
+      currentLB = idx;
+      updateLB();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function closeLB(e) {
+      if (e.target === document.getElementById('lightbox')) closeLightbox();
+    }
+
+    function navLB(dir) {
+      currentLB = (currentLB + dir + photos.length) % photos.length;
+      updateLB();
+    }
+
+    function updateLB() {
+      const p = photos[currentLB];
+      document.getElementById('lbEmoji').textContent = p.emoji;
+      document.getElementById('lbBg').style.background = `radial-gradient(circle, ${p.bg}, transparent)`;
+      document.getElementById('lbTitle').textContent = p.title;
+      document.getElementById('lbDesc').textContent = p.desc;
+      document.getElementById('lbTag').textContent = p.tag;
+    }
+
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'ArrowRight') navLB(1);
+      if (e.key === 'ArrowLeft')  navLB(-1);
+      if (e.key === 'Escape')     closeLightbox();
+    });
+
+    renderCards();
+  </script>
+</body>
+</html>
