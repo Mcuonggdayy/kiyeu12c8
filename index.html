@@ -1,339 +1,118 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kỉ Yếu Lớp 12A1 — 2024</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kỉ Yếu Lớp 12C8 – THPT Bến Cát</title>
   <style>
-    :root {
-      --gold:       #C9A84C;
-      --gold-light: #E8C96A;
-      --navy:       #0D1B2A;
-      --navy-mid:   #162236;
-      --cream:      #F8F2E6;
-      --warm:       #EFE5CC;
-      --text-light: #C8B99A;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--navy);
-      color: var(--cream);
+      font-family: 'Segoe UI', sans-serif;
+      background: #d6e4f0;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-    }
-
-    /* ── HEADER ── */
-    header {
-      position: relative;
-      background: var(--navy);
-      border-bottom: 1px solid rgba(201,168,76,.25);
-      padding: 0 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 80px;
-      z-index: 100;
-    }
-    header::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .logo-emblem {
-      width: 46px; height: 46px;
-      border: 2px solid var(--gold);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      position: relative;
-      background: radial-gradient(circle at 40% 40%, rgba(201,168,76,.15), transparent);
-    }
-    .logo-emblem span {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      font-weight: 900;
-      color: var(--gold);
-    }
-    .logo-text h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--cream);
-      letter-spacing: .04em;
-      line-height: 1.1;
-    }
-    .logo-text p {
-      font-size: 11px;
-      color: var(--gold);
-      letter-spacing: .15em;
-      text-transform: uppercase;
-    }
-
-    /* ── NAV ── */
-    nav {
-      display: flex;
-      gap: 4px;
-    }
-    nav button {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      background: transparent;
-      border: 1px solid transparent;
-      padding: 10px 22px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all .28s ease;
-      position: relative;
-    }
-    nav button:hover {
-      color: var(--cream);
-      border-color: rgba(201,168,76,.3);
-      background: rgba(201,168,76,.06);
-    }
-    nav button.active {
-      color: var(--gold);
-      border-color: rgba(201,168,76,.5);
-      background: rgba(201,168,76,.1);
-    }
-    nav button.active::after {
-      content: '';
-      position: absolute;
-      bottom: -1px; left: 50%; transform: translateX(-50%);
-      width: 40%; height: 2px;
-      background: var(--gold);
-    }
-
-    /* ── DECORATIVE RIBBON ── */
-    .ribbon {
-      background: linear-gradient(90deg, var(--navy), #1a2d43, var(--navy));
-      border-bottom: 1px solid rgba(201,168,76,.12);
-      padding: 8px 48px;
-      display: flex;
-      align-items: center;
       justify-content: center;
-      gap: 16px;
-    }
-    .ribbon-line {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,168,76,.4), transparent);
-    }
-    .ribbon-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 13px;
-      color: var(--gold);
-      letter-spacing: .2em;
-      white-space: nowrap;
+      padding: 30px 16px 40px;
     }
 
-    /* ── IFRAME WRAPPER ── */
-    .iframe-container {
-      flex: 1;
-      position: relative;
-      background: var(--navy-mid);
-    }
-    .iframe-container iframe {
+    /* ── Khung trung tâm ── */
+    .wrapper {
       width: 100%;
-      height: calc(100vh - 80px - 37px);
+      max-width: 980px;
+      background: #ffffff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 32px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, #0a1628, #1b3a5c, #0a1628);
+      color: #f0c040;
+      text-align: center;
+      padding: 36px 24px 22px;
+      border-bottom: 3px solid #f0c040;
+    }
+    header .school { font-size: 12px; letter-spacing: 3px; color: #8fb8d8; text-transform: uppercase; margin-bottom: 8px; }
+    header h1 { font-size: 30px; letter-spacing: 4px; font-weight: 700; }
+    header .sub { margin-top: 8px; font-size: 13px; color: #9ec4dd; letter-spacing: 1px; }
+
+    /* ── Nav ── */
+    nav {
+      background: #0f2540;
+      display: flex;
+      justify-content: center;
+      border-bottom: 2px solid #f0c040;
+    }
+    nav a {
+      color: #b8cfe0;
+      text-decoration: none;
+      padding: 14px 48px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav a:hover,
+    nav a.active {
+      background: #f0c040;
+      color: #0a1628;
+      font-weight: 700;
+    }
+
+    /* ── iframe ── */
+    iframe {
+      width: 100%;
+      flex: 1;
       border: none;
       display: block;
-      opacity: 0;
-      transition: opacity .5s ease;
-    }
-    .iframe-container iframe.loaded {
-      opacity: 1;
+      min-height: 620px;
+      background: #f5f8fc;
     }
 
-    /* Loading overlay */
-    .loading-overlay {
-      position: absolute;
-      inset: 0;
-      background: var(--navy-mid);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 20px;
-      z-index: 10;
-      transition: opacity .4s ease;
-    }
-    .loading-overlay.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-    .loader-ring {
-      width: 50px; height: 50px;
-      border: 2px solid rgba(201,168,76,.15);
-      border-top-color: var(--gold);
-      border-radius: 50%;
-      animation: spin .8s linear infinite;
-    }
-    .loader-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      color: var(--gold);
-      font-size: 15px;
-      letter-spacing: .1em;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ── FOOTER ── */
+    /* ── Footer ── */
     footer {
-      background: var(--navy);
-      border-top: 1px solid rgba(201,168,76,.15);
-      padding: 14px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      background: #0f2540;
+      color: #5a7a94;
+      text-align: center;
+      font-size: 12px;
+      padding: 12px 16px;
+      letter-spacing: 0.5px;
     }
-    footer p {
-      font-size: 11.5px;
-      color: rgba(200,185,154,.5);
-      letter-spacing: .05em;
-    }
-    .footer-ornament {
-      display: flex; align-items: center; gap: 10px;
-    }
-    .footer-ornament span {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      color: rgba(201,168,76,.3);
-    }
-
-    /* ── CORNER DECORATIONS ── */
-    .corner {
-      position: fixed;
-      width: 60px; height: 60px;
-      z-index: 1000;
-      pointer-events: none;
-    }
-    .corner svg { width: 100%; height: 100%; }
-    .corner-tl { top: 0; left: 0; }
-    .corner-tr { top: 0; right: 0; transform: scaleX(-1); }
-    .corner-bl { bottom: 0; left: 0; transform: scaleY(-1); }
-    .corner-br { bottom: 0; right: 0; transform: scale(-1); }
+    footer span { color: #f0c040; }
   </style>
 </head>
 <body>
+<div class="wrapper">
 
-  <!-- Corner decorations -->
-  <div class="corner corner-tl">
-    <svg viewBox="0 0 60 60" fill="none">
-      <path d="M2 2 L2 30 M2 2 L30 2" stroke="rgba(201,168,76,.4)" stroke-width="1"/>
-      <path d="M8 8 L8 22 M8 8 L22 8" stroke="rgba(201,168,76,.25)" stroke-width=".5"/>
-      <circle cx="2" cy="2" r="2" fill="rgba(201,168,76,.5)"/>
-    </svg>
-  </div>
-  <div class="corner corner-tr">
-    <svg viewBox="0 0 60 60" fill="none">
-      <path d="M2 2 L2 30 M2 2 L30 2" stroke="rgba(201,168,76,.4)" stroke-width="1"/>
-      <path d="M8 8 L8 22 M8 8 L22 8" stroke="rgba(201,168,76,.25)" stroke-width=".5"/>
-      <circle cx="2" cy="2" r="2" fill="rgba(201,168,76,.5)"/>
-    </svg>
-  </div>
-  <div class="corner corner-bl">
-    <svg viewBox="0 0 60 60" fill="none">
-      <path d="M2 2 L2 30 M2 2 L30 2" stroke="rgba(201,168,76,.4)" stroke-width="1"/>
-      <path d="M8 8 L8 22 M8 8 L22 8" stroke="rgba(201,168,76,.25)" stroke-width=".5"/>
-      <circle cx="2" cy="2" r="2" fill="rgba(201,168,76,.5)"/>
-    </svg>
-  </div>
-  <div class="corner corner-br">
-    <svg viewBox="0 0 60 60" fill="none">
-      <path d="M2 2 L2 30 M2 2 L30 2" stroke="rgba(201,168,76,.4)" stroke-width="1"/>
-      <path d="M8 8 L8 22 M8 8 L22 8" stroke="rgba(201,168,76,.25)" stroke-width=".5"/>
-      <circle cx="2" cy="2" r="2" fill="rgba(201,168,76,.5)"/>
-    </svg>
-  </div>
-
-  <!-- Header -->
   <header>
-    <div class="logo">
-      <div class="logo-emblem"><span>12</span></div>
-      <div class="logo-text">
-        <h1>Kỉ Yếu Lớp 12C8</h1>
-        <p>Trường THPT Bến Cát · Niên Khoá 2023–2026</p>
-      </div>
-    </div>
-    <nav id="mainNav">
-      <button class="active" onclick="loadPage('trang-chu.html', this)">🏠 Trang Chủ</button>
-      <button onclick="loadPage('danh-sach.html', this)">📋 Danh Sách Học Sinh</button>
-      <button onclick="loadPage('anh-ky-yeu.html', this)">📷 Ảnh Kỉ Yếu</button>
-    </nav>
+    <div class="school">Trường THPT Bến Cát</div>
+    <h1>✦ KỈ YẾU LỚP 12C8 ✦</h1>
+    <div class="sub">Năm học 2025 – 2026 &nbsp;|&nbsp; GVCN: Thầy Lê Khắc Thuận</div>
   </header>
 
-  <!-- Decorative ribbon -->
-  <div class="ribbon">
-    <div class="ribbon-line"></div>
-    <span class="ribbon-text">✦ Những kỷ niệm đẹp nhất — Mãi khắc trong tim ✦</span>
-    <div class="ribbon-line"></div>
-  </div>
+  <nav>
+    <a href="#" class="active" onclick="return go('trangchu.html', this)">🏠 Trang Chủ</a>
+    <a href="#" onclick="return go('thanhvien.html', this)">👥 Thành Viên</a>
+    <a href="#" onclick="return go('kyniem.html', this)">📸 Kỷ Niệm</a>
+  </nav>
 
-  <!-- Main iframe area -->
-  <div class="iframe-container">
-    <div class="loading-overlay" id="loadingOverlay">
-      <div class="loader-ring"></div>
-      <p class="loader-text">Đang tải...</p>
-    </div>
-    <iframe id="mainFrame" src="trang-chu.html" title="Nội dung chính" onload="onFrameLoaded()"></iframe>
-  </div>
+  <iframe id="frame" src="trangchu.html"></iframe>
 
-  <footer>
-    <p>© 2025 Lớp 12A1 · THPT Nguyễn Du · Tất cả quyền được bảo lưu</p>
-    <div class="footer-ornament">
-      <span>✦</span>
-      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(201,168,76,.5);font-size:13px">Lưu giữ ký ức — Nâng niu tình bạn</p>
-      <span>✦</span>
-    </div>
-  </footer>
+  <footer>© 2026 &nbsp;—&nbsp; Kỉ Yếu Lớp <span>12C8</span> &nbsp;·&nbsp; THPT Bến Cát &nbsp;·&nbsp; Trân trọng từng khoảnh khắc bên nhau</footer>
 
-  <script>
-    function loadPage(src, btn) {
-      const overlay = document.getElementById('loadingOverlay');
-      const frame   = document.getElementById('mainFrame');
+</div>
 
-      // update active nav
-      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      // show loading
-      overlay.classList.remove('hidden');
-      frame.classList.remove('loaded');
-      frame.src = src;
-    }
-
-    function onFrameLoaded() {
-      const overlay = document.getElementById('loadingOverlay');
-      const frame   = document.getElementById('mainFrame');
-      overlay.classList.add('hidden');
-      frame.classList.add('loaded');
-    }
-
-    // initial load
-    window.addEventListener('load', () => {
-      const frame = document.getElementById('mainFrame');
-      if (frame.contentDocument && frame.contentDocument.readyState === 'complete') {
-        onFrameLoaded();
-      }
-    });
-  </script>
+<script>
+  function go(page, el) {
+    document.getElementById('frame').src = page;
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    el.classList.add('active');
+    return false;
+  }
+</script>
 </body>
 </html>
