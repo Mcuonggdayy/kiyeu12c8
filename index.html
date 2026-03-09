@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kỉ Yếu Lớp 12C8 – THPT Bến Cát</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #d6e4f0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 30px 16px 40px;
+    }
+
+    /* ── Khung trung tâm ── */
+    .wrapper {
+      width: 100%;
+      max-width: 980px;
+      background: #ffffff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 32px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, #0a1628, #1b3a5c, #0a1628);
+      color: #f0c040;
+      text-align: center;
+      padding: 36px 24px 22px;
+      border-bottom: 3px solid #f0c040;
+    }
+    header .school { font-size: 12px; letter-spacing: 3px; color: #8fb8d8; text-transform: uppercase; margin-bottom: 8px; }
+    header h1 { font-size: 30px; letter-spacing: 4px; font-weight: 700; }
+    header .sub { margin-top: 8px; font-size: 13px; color: #9ec4dd; letter-spacing: 1px; }
+
+    /* ── Nav ── */
+    nav {
+      background: #0f2540;
+      display: flex;
+      justify-content: center;
+      border-bottom: 2px solid #f0c040;
+    }
+    nav a {
+      color: #b8cfe0;
+      text-decoration: none;
+      padding: 14px 48px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav a:hover,
+    nav a.active {
+      background: #f0c040;
+      color: #0a1628;
+      font-weight: 700;
+    }
+
+    /* ── iframe ── */
+    iframe {
+      width: 100%;
+      flex: 1;
+      border: none;
+      display: block;
+      min-height: 620px;
+      background: #f5f8fc;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #0f2540;
+      color: #5a7a94;
+      text-align: center;
+      font-size: 12px;
+      padding: 12px 16px;
+      letter-spacing: 0.5px;
+    }
+    footer span { color: #f0c040; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header>
+    <div class="school">Trường THPT Bến Cát</div>
+    <h1>✦ KỈ YẾU LỚP 12C8 ✦</h1>
+    <div class="sub">Năm học 2025 – 2026 &nbsp;|&nbsp; GVCN: Thầy Lê Khắc Thuận</div>
+  </header>
+
+  <nav>
+    <a href="#" class="active" onclick="return go('trangchu.html', this)">🏠 Trang Chủ</a>
+    <a href="#" onclick="return go('thanhvien.html', this)">👥 Thành Viên</a>
+    <a href="#" onclick="return go('kyniem.html', this)">📸 Kỷ Niệm</a>
+  </nav>
+
+  <iframe id="frame" src="trangchu.html"></iframe>
+
+  <footer>© 2026 &nbsp;—&nbsp; Kỉ Yếu Lớp <span>12C8</span> &nbsp;·&nbsp; THPT Bến Cát &nbsp;·&nbsp; Trân trọng từng khoảnh khắc bên nhau</footer>
+
+</div>
+
+<script>
+  function go(page, el) {
+    document.getElementById('frame').src = page;
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    el.classList.add('active');
+    return false;
+  }
+</script>
+</body>
+</html>

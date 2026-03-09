@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Thành Viên – 12C8</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f8fc;
+      color: #2d3748;
+      padding: 36px 32px 48px;
+    }
+
+    .page-title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: #0f2540;
+      margin-bottom: 4px;
+      letter-spacing: 1px;
+    }
+    .page-sub {
+      text-align: center;
+      font-size: 13px;
+      color: #8fa8c0;
+      margin-bottom: 20px;
+    }
+
+    /* LEGEND */
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 26px;
+      margin-bottom: 18px;
+      font-size: 13px;
+      color: #5a6e80;
+    }
+    .legend span { display: flex; align-items: center; gap: 8px; }
+    .dot {
+      width: 14px; height: 14px;
+      border-radius: 3px;
+      border: 1px solid #c8d8e8;
+    }
+
+    /* TABLE */
+    .member-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+    }
+    .member-table thead tr {
+      background: #0f2540;
+      color: #f0c040;
+    }
+    .member-table th {
+      padding: 13px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: 0.4px;
+    }
+    .member-table td {
+      padding: 12px 10px;
+      font-size: 13.5px;
+      text-align: center;
+      border-bottom: 1px solid #edf2f7;
+      vertical-align: middle;
+    }
+    .member-table tbody tr:last-child td { border-bottom: none; }
+    .member-table tbody tr:hover td    { background: #fffbea !important; transition: background 0.15s; }
+
+    /* Row tints */
+    .row-leader td { background: #fff8e0; }
+    .row-vice   td { background: #e8f3fb; }
+
+    td.stt  { color: #9ab0c4; font-weight: 600; font-size: 13px; width: 50px; }
+    td.name {
+      text-align: left;
+      font-weight: 700;
+      padding-left: 18px;
+      color: #0f2540;
+      font-size: 14px;
+    }
+
+    .badge-leader { color: #a07808; font-weight: 700; font-size: 13px; }
+    .badge-vice   { color: #1a6e9a; font-weight: 700; font-size: 13px; }
+    .badge-member { color: #4a6878; font-size: 13px; }
+
+    td.hobby { text-align: left; color: #5a6e80; font-size: 13px; }
+    td.quote { text-align: left; font-style: italic; color: #5a6e80; font-size: 13px; }
+  </style>
+</head>
+<body>
+
+  <div class="page-title">👥 Danh Sách Thành Viên</div>
+  <div class="page-sub">Lớp 12C8 – THPT Bến Cát – Năm học 2025–2026</div>
+
+  <div class="legend">
+    <span><span class="dot" style="background:#fff8e0;"></span>Tổ trưởng</span>
+    <span><span class="dot" style="background:#e8f3fb;"></span>Tổ phó</span>
+    <span><span class="dot" style="background:#fff;"></span>Tổ viên</span>
+  </div>
+
+  <table class="member-table">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th style="text-align:left; padding-left:18px;">Họ và Tên</th>
+        <th>Chức Vụ</th>
+        <th>Ngày Sinh</th>
+        <th>Sở Thích</th>
+        <th>Câu Nói Yêu Thích</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- TỔ TRƯỞNG -->
+      <tr class="row-leader">
+        <td class="stt">01</td>
+        <td class="name">Ngô Nhựt Phát</td>
+        <td><span class="badge-leader">⭐ Tổ Trưởng</span></td>
+        <td>––/––/2008</td>
+        <td class="hobby">___</td>
+        <td class="quote">___"</td>
+      </tr>
+
+      <!-- TỔ PHÓ -->
+      <tr class="row-vice">
+        <td class="stt">02</td>
+        <td class="name">Kim Quý</td>
+        <td><span class="badge-vice">🔹 Tổ Phó</span></td>
+        <td>--/--/2008</td>
+        <td class="hobby">___</td>
+        <td class="quote">___</td>
+      </tr>
+
+      <!-- TỔ VIÊN -->
+      <tr>
+        <td class="stt">03</td>
+        <td class="name">Trần Gia Lạc</td>
+        <td><span class="badge-member">Tổ Viên</span></td>
+        <td>––/––/2008</td>
+        <td class="hobby">___</td>
+        <td class="quote">___</td>
+      </tr>
+      <tr>
+        <td class="stt">04</td>
+        <td class="name">Vũ Gia Lộc</td>
+        <td><span class="badge-member">Tổ Viên</span></td>
+        <td>––/––/2008</td>
+        <td class="hobby">___</td>
+        <td class="quote">___</td>
+      </tr>
+      <tr>
+        <td class="stt">05</td>
+        <td class="name">Nguyễn Anh Khoa</td>
+        <td><span class="badge-member">Tổ Viên</span></td>
+        <td>––/––/2008</td>
+        <td class="hobby">___</td>
+        <td class="quote">___</td>
+      </tr>
+      <tr>
+        <td class="stt">06</td>
+        <td class="name">Nguyễn Đăng Khôi</td>
+        <td><span class="badge-member">Tổ Viên</span></td>
+        <td>––/––/2008</td>
+        <td class="hobby">___</td>
+        <td class="quote">___</td>
+      </tr>
+      <tr>
+        <td class="stt">07</td>
+        <td class="name">Bảo Nghi</td>
+        <td><span class="badge-member">Tổ Viên</span></td>
+        <td>––/––/2008</td>
+        <td class="hobby">___</td>
+        <td class="quote">___</td>
+      </tr>
+      <tr>
+        <td class="stt">08</td>
+        <td class="name">Hoàng Mạnh Cường</td>
+        <td><span class="badge-member">Tổ Viên</span></td>
+        <td>––/––/2008</td>
+        <td class="hobby">___</td>
+        <td class="quote">___"</td>
+      </tr>
+      <tr>
+        <td class="stt">09</td>
+        <td class="name">Tuấn Anh</td>
+        <td><span class="badge-member">Tổ Viên</span></td>
+        <td>––/––/2008</td>
+        <td class="hobby">___</td>
+        <td class="quote">___."</td>
+      </tr>
+      <tr>
+        <td class="stt">10</td>
+        <td class="name">Tiến Anh</td>
+        <td><span class="badge-member">Tổ Viên</span></td>
+        <td>––/––/2008</td>
+        <td class="hobby">___c</td>
+        <td class="quote">"___n."</td>
+      </tr>
+      <tr>
+        <td class="stt">11</td>
+        <td class="name">Dương Nhật Nam</td>
+        <td><span class="badge-member">Tổ Viên</span></td>
+        <td>––/––/2008</td>
+        <td class="hobby">P___</td>
+        <td class="quote">"___."</td>
+      </tr>
+
+       <tr>
+        <td class="stt">12</td>
+        <td class="name">Gia Khánh</td>
+        <td><span class="badge-member">Tổ Viên</span></td>
+        <td>––/––/2008</td>
+        <td class="hobby">P___</td>
+        <td class="quote">"___."</td>
+      </tr>
+      </tr>
+
+    </tbody>
+  </table>
+
+</body>
+</html>
